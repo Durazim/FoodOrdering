@@ -11,13 +11,17 @@ require('loginTest.php');
   }
   extract($_GET);
   //paging orders
-  if(!isset($p)){
+  if(!isset($p))
+  {
     $p = 1;
   }
-  if($p == '' || $p == 1){
+
+  if($p == '' || $p == 1)
+  {
     $p1 = 0;
   }
-  else {
+  else 
+  {
     $p1 = ($p * 1) - 1;
   }
   //end paging
@@ -27,23 +31,28 @@ require('loginTest.php');
       $sql = "select * from orderslist where cid = ? and ostatus = ? limit $p1,10";
       $orderpaging = $db->prepare("select * from orderslist where cid = ? and ostatus = ?");
       $stmt = $db->prepare($sql);
-      if(isset($acknowledge)){
+      if(isset($acknowledge))
+      {
         $stmt->execute(array($arr[2],"acknowledge"));
         $orderpaging->execute(array($arr[2],"acknowledge"));
       }
-      else if (isset($inproccess)){
+      else if (isset($inproccess))
+      {
         $stmt->execute(array($arr[2],"in proccess"));
         $orderpaging->execute(array($arr[2],"in proccess"));
       }
-      else if (isset($intheway)){
+      else if (isset($intheway))
+      {
         $stmt->execute(array($arr[2],"in the way"));
         $orderpaging->execute(array($arr[2],"in the way"));
       }
-      else if (isset($complete)){
+      else if (isset($complete))
+      {
         $stmt->execute(array($arr[2],"complete"));
         $orderpaging->execute(array($arr[2],"complete"));
       }
-      else {
+      else 
+      {
         header("location:allOrders.php?acknowledge=yes&p=1");
         die();
       }
@@ -54,16 +63,20 @@ require('loginTest.php');
   {
       die($ex->getMessage());
   }
-if(isset($acknowledge)){
+if(isset($acknowledge))
+{
   $current = "acknowledge";
 }
-else if(isset($inproccess)){
+else if(isset($inproccess))
+{
   $current = "inproccess";
 }
-else if(isset($intheway)){
+else if(isset($intheway))
+{
   $current = "intheway";
 }
-else if(isset($complete)){
+else if(isset($complete))
+{
   $current = "complete";
 }
 ?>
